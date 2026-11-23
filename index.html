@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7a8c4">
+  <meta name="description" content="Tasty Tok — уютная кулинарная вселенная с рецептами и Баксиком.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <title>Tasty Tok — готовь с удовольствием</title>
+  <style>
+    :root {
+      --pink:#f18bb2; --pink-dark:#d94e83; --pink-soft:#ffe2ed;
+      --cream:#fff8f6; --paper:#fffdfc; --ink:#542431; --muted:#9d7580;
+      --line:#f3c8d6; --shadow:0 10px 28px rgba(156,70,103,.13);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(135deg,#ffeaf1,#fff5f3 55%,#ffe3ec);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .app{max-width:1180px;margin:auto;padding:18px 22px 100px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+    .brand-mark{width:48px;height:48px;border-radius:17px;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow);font-size:27px}
+    .brand-name{font-family:Georgia,serif;font-size:clamp(27px,4vw,39px);font-weight:900;letter-spacing:-1.5px;color:#9d294f;text-shadow:1px 2px #fff}
+    .brand-sub{font-size:12px;color:var(--muted);margin-top:-3px}
+    .header-actions{display:flex;gap:9px}
+    .icon-btn{border:1px solid var(--line);background:#fff9fb;color:var(--pink-dark);border-radius:15px;width:43px;height:43px;font-size:20px;box-shadow:0 4px 12px #a34d6812}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:300px;background:linear-gradient(115deg,#ffd5e4,#f7a8c4 58%,#f7c4d5);border:1px solid #f2b8cb;border-radius:30px;overflow:hidden;box-shadow:var(--shadow);position:relative;margin-bottom:22px}
+    .hero-copy{padding:34px 36px;z-index:1}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#a33d63}
+    h1{font-family:Georgia,serif;font-size:clamp(31px,4vw,49px);line-height:1.02;margin:12px 0;color:#74253f;max-width:490px}
+    .hero p{color:#784354;max-width:420px;line-height:1.55;margin:0 0 20px}
+    .search{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #f4c4d4;border-radius:18px;padding:0 15px;max-width:470px;box-shadow:0 5px 16px #9d42651a}
+    .search span{font-size:20px}
+    .search input{border:0;outline:0;background:transparent;padding:15px 0;width:100%;color:var(--ink)}
+    .hero-cat{display:flex;align-items:end;justify-content:center;position:relative;font-size:clamp(135px,21vw,225px);line-height:1;filter:drop-shadow(0 12px 9px #9b47602b);padding-top:16px}
+    .speech{position:absolute;right:16px;top:24px;background:#fff8fb;border:1px solid #f3bfd0;border-radius:20px 20px 4px 20px;padding:12px 16px;font-weight:800;font-size:14px;max-width:165px;text-align:center;box-shadow:var(--shadow);transform:rotate(3deg)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 2px 14px}
+    h2{font-family:Georgia,serif;font-size:25px;margin:0;color:#713047}
+    .muted{color:var(--muted);font-size:13px}
+    .categories{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .category{border:1px solid var(--line);background:#fff9fb;border-radius:20px;padding:15px 8px;text-align:center;color:var(--ink);box-shadow:0 5px 14px #9b49630d;transition:.18s}
+    .category:hover,.category.active{transform:translateY(-3px);background:#ffe0eb;border-color:#e995b4}
+    .category .emoji{font-size:30px;display:block;margin-bottom:7px}
+    .category strong{font-size:13px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+    .chip{border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:#fff9fb;color:#8a5364;font-size:13px}
+    .chip.active{background:#e96f9c;color:white;border-color:#e96f9c}
+    .recipes{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+    .recipe-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 7px 18px #9b496313;cursor:pointer;transition:.2s;position:relative}
+    .recipe-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .food-photo{height:160px;background-size:cover;background-position:center;position:relative;display:grid;place-items:center;font-size:65px}
+    .food-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#57253625)}
+    .tag{position:absolute;left:11px;bottom:10px;z-index:1;background:#fff1f6;border-radius:99px;padding:5px 10px;font-size:11px;font-weight:800;color:#a43d64}
+    .heart{position:absolute;right:10px;top:10px;z-index:2;border:0;border-radius:50%;width:34px;height:34px;background:#fff;color:#d65d8b;font-size:18px}
+    .recipe-info{padding:13px 14px 15px}
+    .recipe-info h3{font-size:16px;margin:0 0 7px;line-height:1.2}
+    .recipe-info p{font-size:12px;color:var(--muted);margin:0 0 10px}
+    .meta{display:flex;gap:12px;color:#936b77;font-size:12px}
+    .universe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .universe{border-radius:22px;min-height:130px;padding:18px;color:#fff;display:flex;flex-direction:column;justify-content:end;box-shadow:var(--shadow);background:linear-gradient(135deg,#633b64,#c77b9e);position:relative;overflow:hidden}
+    .universe:nth-child(2){background:linear-gradient(135deg,#34516e,#8c9bb9)}
+    .universe:nth-child(3){background:linear-gradient(135deg,#a85d3d,#e5a76d)}
+    .universe .u-emoji{position:absolute;right:14px;top:6px;font-size:62px;opacity:.8}
+    .universe strong{font-family:Georgia,serif;font-size:20px;z-index:1}
+    .universe small{opacity:.9;z-index:1}
+    .empty{grid-column:1/-1;text-align:center;padding:45px 15px;background:#fff9fb;border:1px dashed var(--line);border-radius:22px;color:var(--muted)}
+    .bottom-nav{position:fixed;z-index:10;bottom:12px;left:50%;transform:translateX(-50%);width:min(540px,calc(100% - 24px));display:flex;justify-content:space-around;background:#fffdfcf2;backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:9px;box-shadow:0 10px 35px #8f3c5c26}
+    .nav-item{border:0;background:transparent;color:#a17c87;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;min-width:58px}
+    .nav-item span{font-size:21px}
+    .nav-item.active{color:#d94e83;font-weight:800}
+    .overlay{position:fixed;inset:0;background:#3b1725a6;z-index:20;display:none;align-items:end;justify-content:center;padding:14px}
+    .overlay.show{display:flex}
+    .sheet{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff9f8;border-radius:28px 28px 20px 20px;padding:22px;box-shadow:0 20px 60px #32101f55;position:relative}
+    .close{position:absolute;right:15px;top:14px;border:0;background:#ffe5ed;color:#a33c62;border-radius:50%;width:38px;height:38px;font-size:20px}
+    .detail-photo{height:220px;border-radius:20px;background-size:cover;background-position:center;display:grid;place-items:center;font-size:95px;margin:22px 0 16px}
+    .detail-meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:9px 0 18px}
+    .tabs{display:flex;gap:8px;margin:18px 0}
+    .tab{border:1px solid var(--line);border-radius:99px;background:#fff;padding:9px 14px;color:#9b6073}
+    .tab.active{background:#ed80a7;color:#fff;border-color:#ed80a7}
+    .ingredient{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f5dce4}
+    .ingredient input{accent-color:#e96f9c;width:17px;height:17px}
+    .primary{border:0;background:linear-gradient(90deg,#e86b99,#f18caf);color:#fff;border-radius:999px;padding:14px 22px;font-weight:800;box-shadow:0 6px 16px #d65b8b36}
+    .secondary{border:1px solid var(--line);background:#fff;color:#a44c6d;border-radius:999px;padding:12px 18px;font-weight:700}
+    .step-card{background:#ffe6ee;border:1px solid #f3bfd0;border-radius:22px;padding:22px;text-align:center;margin:18px 0}
+    .step-cat{font-size:90px}
+    .step-count{display:inline-block;background:#f08ab0;color:white;border-radius:99px;padding:6px 13px;font-size:13px;font-weight:800}
+    .step-text{font-family:Georgia,serif;font-size:23px;line-height:1.3;margin:15px auto;max-width:500px}
+    .step-controls{display:flex;justify-content:space-between;gap:12px}
+    .form-row{display:grid;gap:6px;margin:12px 0}
+    .form-row label{font-weight:700;font-size:13px}
+    .form-row input,.form-row textarea{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;outline-color:#ed80a7;color:var(--ink)}
+    .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#6b3046;color:#fff;padding:11px 17px;border-radius:99px;z-index:30;display:none;font-size:13px}
+    @media(max-width:800px){.app{padding:12px 13px 100px}.hero{grid-template-columns:1fr .7fr;min-height:250px}.hero-copy{padding:25px 20px}.hero-cat{font-size:145px}.categories{grid-template-columns:repeat(3,1fr)}.recipes{grid-template-columns:repeat(2,1fr)}.food-photo{height:135px}.universe-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){header{margin-bottom:13px}.brand-mark{width:41px;height:41px}.brand-name{font-size:29px}.brand-sub{font-size:10px}.hero{grid-template-columns:1fr .55fr;min-height:230px;border-radius:24px}.hero-copy{padding:21px 14px}.hero h1{font-size:30px}.hero p{font-size:12px;margin-bottom:14px}.hero-cat{font-size:115px;align-items:center}.speech{font-size:10px;right:5px;top:13px;padding:8px}.search input{padding:12px 0;font-size:13px}.section-head{margin-top:23px}.section-head h2{font-size:22px}.category{padding:12px 5px}.category .emoji{font-size:27px}.category strong{font-size:11px}.recipes{gap:10px}.food-photo{height:120px}.recipe-info{padding:11px}.recipe-info h3{font-size:14px}.recipe-info p{font-size:11px}.meta{font-size:10px;gap:8px}.universe-grid{grid-template-columns:1fr}.universe{min-height:105px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <a class="brand" href="#" onclick="go('home');return false">
+      <div class="brand-mark">🐾</div>
+      <div><div class="brand-name">Tasty Tok</div><div class="brand-sub">Готовь с удовольствием ♡</div></div>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="installBtn" title="Установить приложение" hidden>⬇</button>
+      <button class="icon-btn" onclick="showAddForm()" title="Добавить рецепт">＋</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">маленькая кулинарная вселенная</div>
+        <h1>Готовим что-нибудь вкусное?</h1>
+        <p>Любимые рецепты, уютные подборки и помощник Баксик — всё в одном месте.</p>
+        <label class="search"><span>⌕</span><input id="searchInput" placeholder="Поиск рецептов..." autocomplete="off"><span>🐾</span></label>
+      </div>
+      <div class="hero-cat"><div class="speech">Что сегодня приготовим? ♡</div>🐱</div>
+    </section>
+
+    <div class="section-head"><h2>Выбери настроение</h2><span class="muted">категории</span></div>
+    <section class="categories" id="categories">
+      <button class="category" data-cat="TikTok"><span class="emoji">🎵</span><strong>TikTok</strong></button>
+      <button class="category" data-cat="Аниме"><span class="emoji">🍜</span><strong>Аниме</strong></button>
+      <button class="category" data-cat="Десерты"><span class="emoji">🍰</span><strong>Десерты</strong></button>
+      <button class="category" data-cat="Напитки"><span class="emoji">🧋</span><strong>Напитки</strong></button>
+      <button class="category" data-cat="Мировая кухня"><span class="emoji">🌍</span><strong>Кухни мира</strong></button>
+      <button class="category" data-cat="Быстро"><span class="emoji">⭐</span><strong>Быстро и просто</strong></button>
+    </section>
+
+    <div class="section-head"><h2 id="recipeHeading">Популярные рецепты</h2><button class="secondary" onclick="clearFilters()">Сбросить</button></div>
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="Все">Все</button><button class="chip" data-filter="До 30 минут">До 30 минут</button><button class="chip" data-filter="Лёгкие">Лёгкие</button><button class="chip" data-filter="Для настроения">Для настроения</button>
+    </div>
+    <section class="recipes" id="recipes"></section>
+
+    <div class="section-head"><h2>Кулинарные вселенные ♡</h2><span class="muted">погружайся во вкус</span></div>
+    <section class="universe-grid">
+      <button class="universe" onclick="setCategory('Аниме')"><span class="u-emoji">🍥</span><strong>Аниме-кухня</strong><small>Рамэн, онигири и многое другое</small></button>
+      <button class="universe" onclick="setCategory('Десерты')"><span class="u-emoji">🪄</span><strong>Волшебная кондитерская</strong><small>Сладости из сказочных миров</small></button>
+      <button class="universe" onclick="setCategory('Мировая кухня')"><span class="u-emoji">🍝</span><strong>Вокруг света</strong><small>Путешествие через рецепты</small></button>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" data-page="home" onclick="go('home')"><span>⌂</span>Главная</button>
+  <button class="nav-item" data-page="world" onclick="go('world')"><span>🌎</span>Вселенная</button>
+  <button class="nav-item" data-page="favorites" onclick="go('favorites')"><span>♡</span>Избранное</button>
+  <button class="nav-item" data-page="profile" onclick="go('profile')"><span>☻</span>Профиль</button>
+</nav>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeSheet()">
+  <section class="sheet" id="sheet"></section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const recipes = [
+ {id:1,title:'Рамэн из «Наруто»',desc:'Настоящий вкус Конохи!',category:'Аниме',time:30,portions:2,rating:'4.9',emoji:'🍜',photo:'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900',ingredients:['Лапша — 200 г','Бульон — 800 мл','Яйца — 2 шт.','Соевый соус — 2 ст. л.','Зелёный лук — по вкусу','Нори — 1 лист'],steps:['Сварите яйца вкрутую (6–7 минут), затем охладите и очистите.','Приготовьте бульон: доведите его до кипения и добавьте соевый соус.','Отдельно сварите лапшу согласно инструкции на упаковке.','Разложите лапшу по мискам и залейте горячим бульоном.','Добавьте половинки яиц, зелёный лук и нори. Подавайте горячим!']},
+ {id:2,title:'Клубничный короткейк',desc:'Нежный десерт с клубникой',category:'Десерты',time:25,portions:4,rating:'4.8',emoji:'🍰',photo:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900',ingredients:['Бисквит — 1 шт.','Клубника — 250 г','Сливки — 200 мл','Сахарная пудра — 2 ст. л.'],steps:['Нарежьте клубнику и оставьте несколько ягод для украшения.','Взбейте холодные сливки с сахарной пудрой.','Разрежьте бисквит на коржи.','Соберите десерт слоями: бисквит, сливки и клубника.','Украсьте ягодами и охладите перед подачей.']},
+ {id:3,title:'Онигири от Баксика',desc:'Японские рисовые шарики',category:'Аниме',time:20,portions:3,rating:'4.9',emoji:'🍙',photo:'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900',ingredients:['Рис для суши — 250 г','Нори — 2 листа','Тунец — 1 банка','Сливочный сыр — 2 ст. л.'],steps:['Промойте рис и сварите до готовности.','Смешайте тунец со сливочным сыром.','Смочите руки водой и сформируйте лепёшку из риса.','Положите начинку в центр и сформируйте треугольник.','Оберните нижнюю часть полоской нори.']},
+ {id:4,title:'Сливочное пиво',desc:'Уютный напиток для вечера',category:'Напитки',time:10,portions:2,rating:'4.7',emoji:'🥤',photo:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=900',ingredients:['Молоко — 400 мл','Карамельный сироп — 2 ст. л.','Взбитые сливки — для подачи','Корица — по вкусу'],steps:['Подогрейте молоко, не доводя до кипения.','Добавьте карамельный сироп и перемешайте.','Разлейте напиток по кружкам.','Добавьте взбитые сливки и немного корицы.']},
+ {id:5,title:'Паста «Карбонара»',desc:'Классика итальянской кухни',category:'Мировая кухня',time:25,portions:2,rating:'4.9',emoji:'🍝',photo:'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=900',ingredients:['Спагетти — 200 г','Бекон — 100 г','Яйца — 2 шт.','Твёрдый сыр — 50 г','Чёрный перец — по вкусу'],steps:['Отварите спагетти до состояния аль денте.','Обжарьте бекон на сковороде.','Смешайте яйца, тёртый сыр и перец.','Снимите сковороду с огня, добавьте пасту и яичную смесь.','Перемешайте до кремовой текстуры и сразу подавайте.']},
+ {id:6,title:'Тост с авокадо',desc:'Быстрый завтрак за 10 минут',category:'TikTok',time:10,portions:1,rating:'4.8',emoji:'🥑',photo:'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900',ingredients:['Хлеб — 2 ломтика','Авокадо — 1 шт.','Лимонный сок — 1 ч. л.','Соль и перец — по вкусу'],steps:['Подрумяньте хлеб в тостере или на сухой сковороде.','Разомните мякоть авокадо с лимонным соком.','Добавьте соль и перец.','Намажьте авокадо на тосты и подавайте.']}
+];
+let favorites = JSON.parse(localStorage.getItem('tt-favorites')||'[]');
+let customRecipes = JSON.parse(localStorage.getItem('tt-custom')||'[]');
+let currentCategory='', currentFilter='Все', currentPage='home', currentRecipe=null, currentStep=0, detailTab='ingredients';
+const allRecipes=()=>[...recipes,...customRecipes];
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2100)}
+function save(){localStorage.setItem('tt-favorites',JSON.stringify(favorites));localStorage.setItem('tt-custom',JSON.stringify(customRecipes))}
+function render(){
+ const query=(document.getElementById('searchInput')?.value||'').toLowerCase();
+ let list=allRecipes().filter(r=>(!currentCategory||r.category===currentCategory)&&(!query||(r.title+' '+r.desc+' '+r.ingredients.join(' ')).toLowerCase().includes(query)));
+ if(currentPage==='favorites')list=list.filter(r=>favorites.includes(r.id));
+ if(currentFilter==='До 30 минут')list=list.filter(r=>r.time<=30);
+ if(currentFilter==='Лёгкие')list=list.filter(r=>r.time<=20);
+ if(currentFilter==='Для настроения')list=list.filter(r=>r.category==='Десерты'||r.category==='Напитки');
+ document.getElementById('recipeHeading').textContent=currentPage==='favorites'?'Избранное ♡':currentCategory||'Популярные рецепты';
+ document.getElementById('recipes').innerHTML=list.length?list.map(r=>`<article class="recipe-card" onclick="openRecipe(${r.id})"><div class="food-photo" style="background-image:url('${r.photo||''}');background-color:#f8d5e2">${r.photo?'':'<span>'+r.emoji+'</span>'}<span class="tag">${r.category}</span><button class="heart" onclick="event.stopPropagation();toggleFav(${r.id})">${favorites.includes(r.id)?'♥':'♡'}</button></div><div class="recipe-info"><h3>${escapeHtml(r.title)}</h3><p>${escapeHtml(r.desc)}</p><div class="meta"><span>⭐ ${r.rating}</span><span>◷ ${r.time} мин</span><span>🍽 ${r.portions}</span></div></div></article>`).join(''):'<div class="empty">🐾<br><strong>Пока здесь пусто</strong><br>Попробуй изменить поиск или добавь свой рецепт.</div>';
+ document.querySelectorAll('.category').forEach(b=>b.classList.toggle('active',b.dataset.cat===currentCategory));
+ document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.dataset.filter===currentFilter));
+ document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===currentPage));
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function setCategory(cat){currentCategory=cat;currentPage='home';render();document.getElementById('recipes').scrollIntoView({behavior:'smooth',block:'start'})}
+function clearFilters(){currentCategory='';currentFilter='Все';document.getElementById('searchInput').value='';render()}
+function go(page){currentPage=page;currentCategory='';currentFilter='Все';if(page==='world'){document.querySelector('.universe-grid').scrollIntoView({behavior:'smooth'});currentPage='home';return}if(page==='profile'){showProfile();return}render();window.scrollTo({top:0,behavior:'smooth'})}
+function toggleFav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];save();render();toast(favorites.includes(id)?'Добавлено в избранное ♡':'Удалено из избранного')}
+function getRecipe(id){return allRecipes().find(r=>r.id===id)}
+function openRecipe(id){currentRecipe=getRecipe(id);detailTab='ingredients';renderDetail()}
+function closeSheet(){document.getElementById('overlay').classList.remove('show')}
+function renderDetail(){
+ const r=currentRecipe;if(!r)return;
+ const tabContent=detailTab==='ingredients'?`<div>${r.ingredients.map(x=>`<label class="ingredient"><input type="checkbox"> ${escapeHtml(x)}</label>`).join('')}</div>`:`<ol>${r.steps.map(x=>`<li style="padding:9px 0;line-height:1.45">${escapeHtml(x)}</li>`).join('')}</ol>`;
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div class="detail-photo" style="background-image:url('${r.photo||''}');background-color:#f8d5e2">${r.photo?'':'<span>'+r.emoji+'</span>'}</div><span class="chip active">${r.category}</span><h2 style="margin-top:10px">${escapeHtml(r.title)}</h2><div class="muted">${escapeHtml(r.desc)}</div><div class="detail-meta"><span>⭐ ${r.rating}</span><span>◷ ${r.time} минут</span><span>🍽 ${r.portions} порции</span></div><div class="tabs"><button class="tab ${detailTab==='ingredients'?'active':''}" onclick="detailTab='ingredients';renderDetail()">Ингредиенты</button><button class="tab ${detailTab==='steps'?'active':''}" onclick="detailTab='steps';renderDetail()">Приготовление</button></div>${tabContent}<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><button class="primary" onclick="startCooking()">👩‍🍳 Начать готовить</button><button class="secondary" onclick="toggleFav(${r.id});renderDetail()">${favorites.includes(r.id)?'♥ В избранном':'♡ В избранное'}</button></div>`;
+ document.getElementById('overlay').classList.add('show');
+}
+function startCooking(){currentStep=0;renderStep()}
+function renderStep(){
+ const r=currentRecipe;const steps=r.steps;
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div style="text-align:center;padding-top:28px"><span class="step-count">Шаг ${currentStep+1} из ${steps.length}</span><div class="step-cat">🐱‍🍳</div><div class="step-text">${escapeHtml(steps[currentStep])}</div><div class="muted">Баксик готовит вместе с тобой ♡</div></div><div class="step-controls" style="margin-top:25px"><button class="secondary" onclick="changeStep(-1)" ${currentStep===0?'disabled':''}>← Назад</button><button class="primary" onclick="changeStep(1)">${currentStep===steps.length-1?'Готово ♡':'Далее →'}</button></div>`;
+}
+function changeStep(n){if(currentStep+n>=currentRecipe.steps.length){closeSheet();toast('Ура! Приятного аппетита ♡');return}currentStep=Math.max(0,currentStep+n);renderStep()}
+function showAddForm(){
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><h2 style="margin:28px 0 14px">Добавить рецепт ♡</h2><form id="addForm"><div class="form-row"><label>Название</label><input name="title" required placeholder="Например, любимый пирог"></div><div class="form-row"><label>Краткое описание</label><input name="desc" placeholder="Что в нём особенного?"></div><div class="form-row"><label>Категория</label><select name="category"><option>Десерты</option><option>Аниме</option><option>TikTok</option><option>Напитки</option><option>Мировая кухня</option></select></div><div class="form-row"><label>Ингредиенты (каждый с новой строки)</label><textarea name="ingredients" rows="4" required placeholder="Мука — 200 г&#10;Сахар — 100 г"></textarea></div><div class="form-row"><label>Шаги приготовления (каждый с новой строки)</label><textarea name="steps" rows="4" required placeholder="Смешайте ингредиенты..."></textarea></div><button class="primary" type="submit">Сохранить рецепт</button></form>`;
+ document.getElementById('overlay').classList.add('show');
+ document.getElementById('addForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);const id=Date.now();customRecipes.unshift({id,title:f.get('title'),desc:f.get('desc')||'Домашний рецепт',category:f.get('category'),time:30,portions:2,rating:'5.0',emoji:'🍓',photo:'',ingredients:f.get('ingredients').split('\n').filter(Boolean),steps:f.get('steps').split('\n').filter(Boolean)});save();closeSheet();currentPage='home';render();toast('Рецепт сохранён ♡')};
+}
+function showProfile(){document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div style="text-align:center;padding:35px 8px 15px"><div style="font-size:85px">🐱</div><h2>Кулинарный профиль</h2><p class="muted">Твоя уютная кухня вместе с Баксиком</p><h3>Сохранено рецептов: ${favorites.length}</h3><h3>Добавлено своих: ${customRecipes.length}</h3><button class="primary" onclick="showAddForm()">＋ Добавить рецепт</button></div>`;document.getElementById('overlay').classList.add('show')}
+document.getElementById('searchInput').addEventListener('input',render);
+document.querySelectorAll('.category').forEach(b=>b.addEventListener('click',()=>setCategory(b.dataset.cat)));
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{currentFilter=b.dataset.filter;render()}));
+render();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const b=document.getElementById('installBtn');b.hidden=false;b.onclick=async()=>{deferredPrompt.prompt();deferredPrompt=null;b.hidden=true}});
+</script>
+</body>
+</html>

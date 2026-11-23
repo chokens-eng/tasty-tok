@@ -1,0 +1,18 @@
+{
+  "name": "Tasty Tok — готовь с удовольствием",
+  "short_name": "Tasty Tok",
+  "description": "Уютная кулинарная вселенная с Баксиком",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff5f3",
+  "theme_color": "#f7a8c4",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
