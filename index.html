@@ -148,9 +148,9 @@
         <p>Любимые рецепты, уютные подборки и помощник Баксик — всё в одном месте.</p>
         <label class="search"><span>⌕</span><input id="searchInput" placeholder="Поиск рецептов..." autocomplete="off"><span>🐾</span></label>
       </div>
-      <div class="hero-cat"><div class="speech">Что сегодня приготовим? ♡</div><img src="assets/baksik-hero.webp" alt="Баксик в поварском колпаке"></div>
+      <div class="hero-cat"><div class="speech">Что сегодня приготовим? ♡</div><img src="baksik-hero.webp" alt="Баксик в поварском колпаке"></div>
     </section>
-    <div class="baksik-note"><img src="assets/baksik-cooking.webp" alt="Баксик готовит"><div><strong>Баксик уже на кухне!</strong><small>Выбирай рецепт — и будем готовить вместе ♡</small></div></div>
+    <div class="baksik-note"><img src="baksik-cooking.webp" alt="Баксик готовит"><div><strong>Баксик уже на кухне!</strong><small>Выбирай рецепт — и будем готовить вместе ♡</small></div></div>
 
     <div class="section-head"><h2>Выбери настроение</h2><span class="muted">категории</span></div>
     <section class="categories" id="categories">
@@ -212,7 +212,7 @@ function render(){
  if(currentFilter==='Лёгкие')list=list.filter(r=>r.time<=20);
  if(currentFilter==='Для настроения')list=list.filter(r=>r.category==='Десерты'||r.category==='Напитки');
  document.getElementById('recipeHeading').textContent=currentPage==='favorites'?'Избранное ♡':currentCategory||'Популярные рецепты';
- document.getElementById('recipes').innerHTML=list.length?list.map(r=>`<article class="recipe-card" onclick="openRecipe(${r.id})"><div class="food-photo" style="background-image:url('${r.photo||''}');background-color:#f8d5e2">${r.photo?'':'<span>'+r.emoji+'</span>'}<span class="tag">${r.category}</span><button class="heart" onclick="event.stopPropagation();toggleFav(${r.id})">${favorites.includes(r.id)?'♥':'♡'}</button></div><div class="recipe-info"><h3>${escapeHtml(r.title)}</h3><p>${escapeHtml(r.desc)}</p><div class="meta"><span>⭐ ${r.rating}</span><span>◷ ${r.time} мин</span><span>🍽 ${r.portions}</span></div></div></article>`).join(''):'<div class="empty"><img src="assets/baksik-sleep.webp" alt="Баксик отдыхает" style="width:min(230px,80%);height:130px;object-fit:contain;display:block;margin:0 auto 8px"><strong>Пока здесь пусто</strong><br>Попробуй изменить поиск или добавь свой рецепт.</div>';
+ document.getElementById('recipes').innerHTML=list.length?list.map(r=>`<article class="recipe-card" onclick="openRecipe(${r.id})"><div class="food-photo" style="background-image:url('${r.photo||''}');background-color:#f8d5e2">${r.photo?'':'<span>'+r.emoji+'</span>'}<span class="tag">${r.category}</span><button class="heart" onclick="event.stopPropagation();toggleFav(${r.id})">${favorites.includes(r.id)?'♥':'♡'}</button></div><div class="recipe-info"><h3>${escapeHtml(r.title)}</h3><p>${escapeHtml(r.desc)}</p><div class="meta"><span>⭐ ${r.rating}</span><span>◷ ${r.time} мин</span><span>🍽 ${r.portions}</span></div></div></article>`).join(''):'<div class="empty"><img src="baksik-sleep.webp" alt="Баксик отдыхает" style="width:min(230px,80%);height:130px;object-fit:contain;display:block;margin:0 auto 8px"><strong>Пока здесь пусто</strong><br>Попробуй изменить поиск или добавь свой рецепт.</div>';
  document.querySelectorAll('.category').forEach(b=>b.classList.toggle('active',b.dataset.cat===currentCategory));
  document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.dataset.filter===currentFilter));
  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===currentPage));
@@ -234,7 +234,7 @@ function renderDetail(){
 function startCooking(){currentStep=0;renderStep()}
 function renderStep(){
  const r=currentRecipe;const steps=r.steps;
- document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div style="text-align:center;padding-top:28px"><span class="step-count">Шаг ${currentStep+1} из ${steps.length}</span><div class="step-cat"><img src="assets/baksik-cooking.webp" alt="Баксик готовит" style="width:190px;height:135px;object-fit:contain;border-radius:18px"></div><div class="step-text">${escapeHtml(steps[currentStep])}</div><div class="muted">Баксик готовит вместе с тобой ♡</div></div><div class="step-controls" style="margin-top:25px"><button class="secondary" onclick="changeStep(-1)" ${currentStep===0?'disabled':''}>← Назад</button><button class="primary" onclick="changeStep(1)">${currentStep===steps.length-1?'Готово ♡':'Далее →'}</button></div>`;
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div style="text-align:center;padding-top:28px"><span class="step-count">Шаг ${currentStep+1} из ${steps.length}</span><div class="step-cat"><img src="baksik-cooking.webp" alt="Баксик готовит" style="width:190px;height:135px;object-fit:contain;border-radius:18px"></div><div class="step-text">${escapeHtml(steps[currentStep])}</div><div class="muted">Баксик готовит вместе с тобой ♡</div></div><div class="step-controls" style="margin-top:25px"><button class="secondary" onclick="changeStep(-1)" ${currentStep===0?'disabled':''}>← Назад</button><button class="primary" onclick="changeStep(1)">${currentStep===steps.length-1?'Готово ♡':'Далее →'}</button></div>`;
 }
 function changeStep(n){if(currentStep+n>=currentRecipe.steps.length){closeSheet();toast('Ура! Приятного аппетита ♡');return}currentStep=Math.max(0,currentStep+n);renderStep()}
 function showAddForm(){
