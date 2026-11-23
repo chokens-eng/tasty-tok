@@ -95,6 +95,36 @@
     .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#6b3046;color:#fff;padding:11px 17px;border-radius:99px;z-index:30;display:none;font-size:13px}
     @media(max-width:800px){.app{padding:12px 13px 100px}.hero{grid-template-columns:1fr .7fr;min-height:250px}.hero-copy{padding:25px 20px}.hero-cat{font-size:145px}.categories{grid-template-columns:repeat(3,1fr)}.recipes{grid-template-columns:repeat(2,1fr)}.food-photo{height:135px}.universe-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:480px){header{margin-bottom:13px}.brand-mark{width:41px;height:41px}.brand-name{font-size:29px}.brand-sub{font-size:10px}.hero{grid-template-columns:1fr .55fr;min-height:230px;border-radius:24px}.hero-copy{padding:21px 14px}.hero h1{font-size:30px}.hero p{font-size:12px;margin-bottom:14px}.hero-cat{font-size:115px;align-items:center}.speech{font-size:10px;right:5px;top:13px;padding:8px}.search input{padding:12px 0;font-size:13px}.section-head{margin-top:23px}.section-head h2{font-size:22px}.category{padding:12px 5px}.category .emoji{font-size:27px}.category strong{font-size:11px}.recipes{gap:10px}.food-photo{height:120px}.recipe-info{padding:11px}.recipe-info h3{font-size:14px}.recipe-info p{font-size:11px}.meta{font-size:10px;gap:8px}.universe-grid{grid-template-columns:1fr}.universe{min-height:105px}}
+
+    /* Tasty Tok visual refresh */
+    body{background:radial-gradient(circle at 8% 8%,#ffd5e4 0,transparent 32%),linear-gradient(135deg,#fff0f5,#fff8f5 55%,#ffe3ed)}
+    .app{max-width:1240px}
+    .brand-mark{background:linear-gradient(145deg,#fff,#ffe5ef);font-size:25px;border:1px solid #f6c5d5}
+    .brand-name{font-family:Georgia,serif;letter-spacing:-1.8px;text-shadow:2px 2px 0 #fff,3px 4px 0 #e9a0b8}
+    .hero{background:linear-gradient(110deg,#ffd9e6 0%,#f8b4cb 58%,#f7c7d7 100%);border:2px solid #fff8fb;min-height:330px}
+    .hero-copy{padding:38px 40px}
+    .hero-cat{align-items:end;padding:0;overflow:hidden}
+    .hero-cat img{height:100%;max-height:330px;width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 12px #9c45612a)}
+    .speech{right:15px;top:24px;z-index:2;color:#7e304b;border:2px solid #fff}
+    .search{border:2px solid #fff;max-width:510px}
+    .category{background:linear-gradient(145deg,#fffdfd,#fff0f5);border:1.5px solid #f3c1d2;box-shadow:0 7px 18px #a34d6810}
+    .category.active{background:#ffdce8;border-color:#e989aa}
+    .category .emoji{filter:drop-shadow(0 2px 1px #9b456022)}
+    .recipe-card{border:1.5px solid #f1bfd0;border-radius:23px;box-shadow:0 8px 20px #a34d6814}
+    .food-photo{height:175px}
+    .recipe-info h3{font-family:Georgia,serif;color:#6e2d43}
+    .universe{border:2px solid #fff6fa;min-height:150px}
+    .bottom-nav{border:2px solid #fff;box-shadow:0 12px 35px #8f3c5c2b}
+    .primary{background:linear-gradient(90deg,#e75f91,#f38caf);box-shadow:0 7px 18px #d65b8b40}
+    .sheet{border:2px solid #ffe3ec}
+    .detail-photo{border:2px solid #fff}
+    .baksik-note{display:flex;align-items:center;gap:12px;background:#fff9fb;border:1.5px solid #f3c6d5;border-radius:20px;padding:10px 15px;margin:18px 0 5px;box-shadow:0 6px 18px #a34d6810}
+    .baksik-note img{width:64px;height:54px;object-fit:cover;object-position:center 28%;border-radius:14px}
+    .baksik-note strong{display:block;font-family:Georgia,serif}
+    .baksik-note small{color:var(--muted)}
+    @media(max-width:800px){.hero{min-height:270px}.hero-copy{padding:25px 20px}.hero-cat img{max-height:270px}.food-photo{height:145px}}
+    @media(max-width:480px){.hero{min-height:235px}.hero-copy{padding:20px 14px}.hero-cat img{max-height:235px;object-fit:cover;object-position:center bottom}.food-photo{height:125px}}
+
   </style>
 </head>
 <body>
@@ -118,8 +148,9 @@
         <p>Любимые рецепты, уютные подборки и помощник Баксик — всё в одном месте.</p>
         <label class="search"><span>⌕</span><input id="searchInput" placeholder="Поиск рецептов..." autocomplete="off"><span>🐾</span></label>
       </div>
-      <div class="hero-cat"><div class="speech">Что сегодня приготовим? ♡</div>🐱</div>
+      <div class="hero-cat"><div class="speech">Что сегодня приготовим? ♡</div><img src="assets/baksik-hero.webp" alt="Баксик в поварском колпаке"></div>
     </section>
+    <div class="baksik-note"><img src="assets/baksik-cooking.webp" alt="Баксик готовит"><div><strong>Баксик уже на кухне!</strong><small>Выбирай рецепт — и будем готовить вместе ♡</small></div></div>
 
     <div class="section-head"><h2>Выбери настроение</h2><span class="muted">категории</span></div>
     <section class="categories" id="categories">
@@ -181,7 +212,7 @@ function render(){
  if(currentFilter==='Лёгкие')list=list.filter(r=>r.time<=20);
  if(currentFilter==='Для настроения')list=list.filter(r=>r.category==='Десерты'||r.category==='Напитки');
  document.getElementById('recipeHeading').textContent=currentPage==='favorites'?'Избранное ♡':currentCategory||'Популярные рецепты';
- document.getElementById('recipes').innerHTML=list.length?list.map(r=>`<article class="recipe-card" onclick="openRecipe(${r.id})"><div class="food-photo" style="background-image:url('${r.photo||''}');background-color:#f8d5e2">${r.photo?'':'<span>'+r.emoji+'</span>'}<span class="tag">${r.category}</span><button class="heart" onclick="event.stopPropagation();toggleFav(${r.id})">${favorites.includes(r.id)?'♥':'♡'}</button></div><div class="recipe-info"><h3>${escapeHtml(r.title)}</h3><p>${escapeHtml(r.desc)}</p><div class="meta"><span>⭐ ${r.rating}</span><span>◷ ${r.time} мин</span><span>🍽 ${r.portions}</span></div></div></article>`).join(''):'<div class="empty">🐾<br><strong>Пока здесь пусто</strong><br>Попробуй изменить поиск или добавь свой рецепт.</div>';
+ document.getElementById('recipes').innerHTML=list.length?list.map(r=>`<article class="recipe-card" onclick="openRecipe(${r.id})"><div class="food-photo" style="background-image:url('${r.photo||''}');background-color:#f8d5e2">${r.photo?'':'<span>'+r.emoji+'</span>'}<span class="tag">${r.category}</span><button class="heart" onclick="event.stopPropagation();toggleFav(${r.id})">${favorites.includes(r.id)?'♥':'♡'}</button></div><div class="recipe-info"><h3>${escapeHtml(r.title)}</h3><p>${escapeHtml(r.desc)}</p><div class="meta"><span>⭐ ${r.rating}</span><span>◷ ${r.time} мин</span><span>🍽 ${r.portions}</span></div></div></article>`).join(''):'<div class="empty"><img src="assets/baksik-sleep.webp" alt="Баксик отдыхает" style="width:min(230px,80%);height:130px;object-fit:contain;display:block;margin:0 auto 8px"><strong>Пока здесь пусто</strong><br>Попробуй изменить поиск или добавь свой рецепт.</div>';
  document.querySelectorAll('.category').forEach(b=>b.classList.toggle('active',b.dataset.cat===currentCategory));
  document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.dataset.filter===currentFilter));
  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===currentPage));
@@ -203,7 +234,7 @@ function renderDetail(){
 function startCooking(){currentStep=0;renderStep()}
 function renderStep(){
  const r=currentRecipe;const steps=r.steps;
- document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div style="text-align:center;padding-top:28px"><span class="step-count">Шаг ${currentStep+1} из ${steps.length}</span><div class="step-cat">🐱‍🍳</div><div class="step-text">${escapeHtml(steps[currentStep])}</div><div class="muted">Баксик готовит вместе с тобой ♡</div></div><div class="step-controls" style="margin-top:25px"><button class="secondary" onclick="changeStep(-1)" ${currentStep===0?'disabled':''}>← Назад</button><button class="primary" onclick="changeStep(1)">${currentStep===steps.length-1?'Готово ♡':'Далее →'}</button></div>`;
+ document.getElementById('sheet').innerHTML=`<button class="close" onclick="closeSheet()">×</button><div style="text-align:center;padding-top:28px"><span class="step-count">Шаг ${currentStep+1} из ${steps.length}</span><div class="step-cat"><img src="assets/baksik-cooking.webp" alt="Баксик готовит" style="width:190px;height:135px;object-fit:contain;border-radius:18px"></div><div class="step-text">${escapeHtml(steps[currentStep])}</div><div class="muted">Баксик готовит вместе с тобой ♡</div></div><div class="step-controls" style="margin-top:25px"><button class="secondary" onclick="changeStep(-1)" ${currentStep===0?'disabled':''}>← Назад</button><button class="primary" onclick="changeStep(1)">${currentStep===steps.length-1?'Готово ♡':'Далее →'}</button></div>`;
 }
 function changeStep(n){if(currentStep+n>=currentRecipe.steps.length){closeSheet();toast('Ура! Приятного аппетита ♡');return}currentStep=Math.max(0,currentStep+n);renderStep()}
 function showAddForm(){
